@@ -1,0 +1,9 @@
+{
+	"name": "jasl",
+	"authors": [
+		"AJ"
+	],
+	"description": "The JASL compiler and emulator.",
+	"copyright": "Copyright © 2018, AJ",
+	"license": "N/A"
+}
