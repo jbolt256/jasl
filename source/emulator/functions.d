@@ -12,7 +12,6 @@ class ELibrary {
 		float result, floatNum = to!float(num);
 		
 		remainder = num % pow(2, bitLength - start + 1);
-		writeln(remainder);
 		result = floor(to!float(remainder) / pow(2, (bitLength - end)));
 		
 		/* Should already be integer, but just to be sure... */
