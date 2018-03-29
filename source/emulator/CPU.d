@@ -51,7 +51,8 @@ class CPU {
 			default: toReturn.compilerMsg = "Unidentified opcode."; break;
 		}
 		
-		/* Set line number to current line number, it doesn't matter anyways */
+		/* Set line number to current line number, it doesn't matter anyways 
+		 */
 		toReturn.lineNum = Line.lineNum;
 		
 		if ( toReturn.opcodeStr == null ) {

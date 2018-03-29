@@ -136,18 +136,31 @@ class CompilerMain {
 	 */
 	private OLine send(ILine data) {
 		OLine toReturn;
+		
+		/* Reset modifier return */
 		M.ret = M.ret.init;
 		
 		/* Try and find modifier -- throws OPCODE_DNE otherwise. */
-		if ( M.opcodeAttrib[data.modifier].minArgs <= data.argc ) {
-			switch ( data.modifier ) {
-				case "XYZ": toReturn = M.XYZ(data); break;
-				case "ERR": toReturn = M.ERR(data); break;
-				default: 
-					throw new JException("Opcode does not exist.", data.inLineNum);
-			}	
-		} else {
-			throw new JException("Too few arguments provided to call opcode.", data.inLineNum);
+		try { 
+			if ( M.opcodeAttrib[data.modifier].minArgs <= data.argc ) {
+				switch ( data.modifier ) {
+					case "XYZ": toReturn = M.XYZ(data); break;
+					case "ERR": toReturn = M.ERR(data); break;
+					default: 
+						throw new JException("Opcode does not exist.", data.inLineNum);
+				}	
+				
+				/* Unless modifier returns own opcode, use attributes */
+				if ( toReturn.opcode == 0 ) {
+					toReturn.opcode = M.opcodeAttrib[data.modifier].opcode;
+				}
+			} else {
+				throw new JException("Too few arguments provided to call opcode.", data.inLineNum);
+			}
+		} catch ( Error e ) {
+			throw new JException("Error calling opcode. Perhaps opcode does not exist?", data.inLineNum);
+		} catch ( Exception e ) {		
+			throw new JException("Error calling opcode. Perhaps opcode does not exist?", data.inLineNum);
 		}
 		
 		/* The modifiers don't typically return these values, so force them. */

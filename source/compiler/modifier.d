@@ -4,7 +4,6 @@ import Compiler.Tools, Compiler.Globals, Emulator.Memory, Compiler.Functions;
 
 class Modifiers {
 	public OLine ret;
-	public int[string] minArgs;
 	public ModAttrib[string] opcodeAttrib;
 	private Memory Mem;
 	private CLibrary CLib;
@@ -20,22 +19,19 @@ class Modifiers {
 		
 		/* Set attributes for modifiers. */
 		opcodeAttrib = [
-			"XYZ": ModAttrib(2, 10),
-			"ERR": ModAttrib(1, 10),
-			"APL": ModAttrib(2, 2)
+			"XYZ": ModAttrib(63, 2, 10),
+			"ERR": ModAttrib(64, 1, 10),
+			"APL": ModAttrib(62, 2, 2)
 			];
 		}
 		
 	public OLine XYZ(ILine data) {
-		int h;
-		ret.opcode = 63;
 		ret.databits = to!int(data.args[1]); // add tools functionality for this
 		ret.cmdlineMsg = "Success.";
 		return ret;
 	}
 	
 	public OLine ERR(ILine data) {
-		ret.opcode = 64;
 		ret.databits = 0;
 		ret.cmdlineMsg = "Error.";
 		return ret;

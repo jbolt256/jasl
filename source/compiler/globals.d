@@ -31,7 +31,7 @@ struct OLine {
  * Currently, maxArgs is not enforced by the compiler.
  */
 struct ModAttrib {
-	int minArgs, maxArgs;
+	int opcode, minArgs, maxArgs;
 }
 
 /** 
