@@ -146,6 +146,7 @@ class CompilerMain {
 				switch ( data.modifier ) {
 					case "XYZ": toReturn = M.XYZ(data); break;
 					case "ERR": toReturn = M.ERR(data); break;
+					case "APL": toReturn = M.APL(data); break;
 					default: 
 						throw new JException("Opcode does not exist.", data.inLineNum);
 				}	
@@ -158,7 +159,8 @@ class CompilerMain {
 				throw new JException("Too few arguments provided to call opcode.", data.inLineNum);
 			}
 		} catch ( Error e ) {
-			throw new JException("Error calling opcode. Perhaps opcode does not exist?", data.inLineNum);
+			writeln(e);
+			throw new JException("Exception calling opcode. Perhaps opcode does not exist?", data.inLineNum);
 		} catch ( Exception e ) {		
 			throw new JException("Error calling opcode. Perhaps opcode does not exist?", data.inLineNum);
 		}

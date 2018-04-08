@@ -14,11 +14,13 @@ class CLibrary {
 		 * for that block. I.e, if we are inserting a 6-bit binary number from digits 3 to 8 (inclusive), the maximum number
 		 * is 63, otherwise it would run for 7 digits.
 		 */
-		if ( value < pow(2, end - start + 1) ) {
-			/* Multiply this number to be inserted by 2^n, where n is the number of digits to the right of the endpoint */
-			num = num + ( value * pow(2, bitLength - end - 1));
-			} else {
-			throw new JException("Number too large to encode.");
+		if ( value > 0 ) { 
+			if ( value < pow(2, end - start + 1) ) {
+				/* Multiply this number to be inserted by 2^n, where n is the number of digits to the right of the endpoint */
+				num = num + ( value * pow(2, bitLength - end - 1));
+				} else {
+				throw new JException("Number too large to encode.");
+				}
 			}
 		return num;
 	}
