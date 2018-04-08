@@ -1,0 +1,4 @@
+## all -- tests every instruction ##
+:ERR
+:XYZ	64
+:APL	$0		XOR		$1

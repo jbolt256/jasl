@@ -14,6 +14,7 @@ class EmulatorMain {
 		int lineNum = 1;
 		string[] linePipeSplit, lines;
 		
+		/* Initialize all memory registers */
 		Mem.init();
 		lines = Compiler.Tools.TFile.getFileLines(filename);
 		
