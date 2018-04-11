@@ -6,8 +6,9 @@ code, which is in turn read by the emulator. The emulator is designed to act as 
 ## Instructions
 
 ### Requirements
-- D language compiler (preferably DMD)
+- D2 language compiler (preferably DMD)
 - 8 MB disk space & ~16MB RAM
+- dxml package (available on dub: https://code.dlang.org/packages/dxml)
 
 This project has only been tested on Windows 10. I cannot ensure it will run on any *nix systems or a Mac.
 
