@@ -1,10 +1,11 @@
 module Compiler.Globals;
+import Main.Configuration;
 
 const uint JASL_vers= 1000;
-
 bool JASL_strict	= false;		// not yet a feature
 bool JASL_usingJC	= false;		// the compiler will set this if needed
 int JEmInstLine		= 0;			// global current emulator line used CAUTIOUSLY for instructions ONLY
+Config GlobalConfig;
 
 /** 
  * struct ILine
@@ -46,3 +47,7 @@ struct ByteLineOut {
 	int opcode, databits, lineNum;
 	string compilerMsg, opcodeStr;
 }
+
+void enableConfig(Config c) {
+	GlobalConfig = c;
+	}

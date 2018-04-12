@@ -1,5 +1,7 @@
+module Main.Configuration;
+
 import std.xml, std.stdio, std.string, std.conv, std.file;
-import Compiler.Globals, Compiler.Tools;
+import Compiler.Tools;
 
 struct ConfigArray {
 	string[string] attributes, tags;
@@ -10,28 +12,32 @@ class Config {
 	public static ConfigArray[string] meta;
 	public static ConfigArray[string] settings;
 	
-	/** Initialize all configuration values once upon initialization of class **/
+	/** 
+	 * Initialize all configuration values once upon initialization of class 
+	 **/
 	this() {
 		string XmlData;
 		if ( this.initialized != true ) {
 			
 			/* Ensure that the file exists before proceeding */
 			if ( !std.file.exists("./config.xml") ) {
-				throw new JException("Configuration file does not exist. Try running with -buildconfig enabled.", 0);
-				} else { 
+				this.initialized = false;
+				writeln("Configuration file does not exist. Try running with -buildconfig.");
+			} else { 
 				XmlData = cast(string) std.file.read("./config.xml");			
 				check(XmlData);
-				}
-				
-			this.settings	 = this.XmlParseArray(XmlData, "Value", 0, [ "id", "name" ], [ "Data", "Bool" ], false);
-			this.meta = this.XmlParseArray(XmlData, "Meta", 0, [], [ "Author", "ReleaseDate", "Version" ], true);
+				this.settings	 = this.XmlParseArray(XmlData, "Value", 0, [ "id", "name" ], [ "Data", "Bool" ], false);
+				this.meta = this.XmlParseArray(XmlData, "Meta", 0, [], [ "Author", "ReleaseDate", "Version" ], true);
 
-			/* Set to true */
-			this.initialized = true;
+				/* Set to true */
+				this.initialized = true;
+			}
 		}
 	}
 	
-	/** Never, ever write an XML parser like this. Please. **/
+	/** 
+	 * Never, ever write an XML parser like this. Please. 
+	 **/
 	private ConfigArray[string] XmlParseArray(string XmlData, string tag, int id, string[] attributes, string[] tags, bool useTagForID = false) {
 		ConfigArray[string] all;
 		bool higherTag;
@@ -87,6 +93,9 @@ class Config {
 		return all;
 	}
 	
+	/** 
+	 * Write a sample config to config.xml for the program to read from. 
+	 **/
 	public static void buildConfig() {
 		string sampleConfigData = "<!-- sample JASL config file -->
 <JASL>
