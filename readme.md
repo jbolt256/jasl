@@ -24,6 +24,12 @@ In Windows PowerShell:
 
 which will compile the program to app.exe, which can then be run using the instructions listed below.
 
+Once that has been done, you should see a compiled program called 'app.exe'. Rename that to 'jasl.exe'. Then build the config by running
+
+`$ ./jasl.exe -buildconfig`
+
+Which should place a file called "config.xml" into your current working directory.
+
 ### Running
 Once compiled, JASL can be run as such:
 
@@ -37,7 +43,17 @@ The following are allowed syntaxes for arguments:
 
 `-cr program.jasl program.jbin` compiles program.jasl, writes to program.jbin, and then emulates the compiled file.
 
+`-config` displays the parsed XML config (config.xml)
+
+`-buildconfig` builds a new default config.xml (see meta/config.default.xml)
+
 Of course, the names used above are placeholders.
+
+### Other
+
+## Notepad++
+Custom syntax highlighting for notepad++ can be found at meta/notepad++UDL.xml. Follow the instructions listed at the top of that file
+to install highlighting.
 
 ## About
 The official JASL specification (mandate 1.0) will be released sometime if necessary. Otherwise, whatever the compiler does is the official specification.

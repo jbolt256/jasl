@@ -18,7 +18,7 @@ class Config {
 	public static ConfigValue[string] settings;
 	public static ConfigMetaValue[string] meta;
 	
-	/* Initialize all configuration values once upon initialization of class */
+	/** Initialize all configuration values once upon initialization of class **/
 	this() {
 		if ( this.initialized != true ) {
 			string XmlData;

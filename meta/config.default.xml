@@ -1,0 +1,21 @@
+<!-- sample JASL config file -->
+<JASL>
+	<!-- Meta: do not change -->
+	<Meta>
+		<Version>0</Version>
+		<Author>AJ</Author>
+		<ReleaseDate>0</ReleaseDate>
+	</Meta>
+	
+	<!-- Settings: feel free to change -->
+	<Settings> 
+		<Value id="0" name="useStrict">
+			<Data>0</Data>
+			<Bool>0</Bool>
+		</Value>
+		<Value id="1" name="useMandate">
+			<Data>0</Data>
+			<Bool>1</Bool>
+		</Value>
+	</Settings>
+</JASL>
