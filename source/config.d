@@ -1,41 +1,31 @@
 import std.xml, std.stdio, std.string, std.conv, std.file;
-import Compiler.Globals, Compiler.Tools, dxml.parser, dxml.util, dxml.dom;
-
-struct ConfigValue {
-	string Id, Name, Data, Bool;
-	}
-
-struct ConfigMetaValue {
-	string Author, Version, ReleaseDate;
-}
+import Compiler.Globals, Compiler.Tools;
 
 struct ConfigArray {
 	string[string] attributes, tags;
 	}
 
 class Config { 
-	private	static bool initialized;
-	public static ConfigValue[string] settings;
-	public static ConfigMetaValue[string] meta;
+	public static bool initialized;
+	public static ConfigArray[string] meta;
+	public static ConfigArray[string] settings;
 	
 	/** Initialize all configuration values once upon initialization of class **/
 	this() {
+		string XmlData;
 		if ( this.initialized != true ) {
-			string XmlData;
 			
+			/* Ensure that the file exists before proceeding */
 			if ( !std.file.exists("./config.xml") ) {
-				throw new JException("Configuration file does not exist.", 0);
+				throw new JException("Configuration file does not exist. Try running with -buildconfig enabled.", 0);
 				} else { 
 				XmlData = cast(string) std.file.read("./config.xml");			
 				check(XmlData);
 				}
 				
-			ConfigArray[string] k = this.XmlParseArray(XmlData, "Value", 0, [ "id", "name" ], [ "Data", "Bool" ], false);
-			ConfigArray[string] y = this.XmlParseArray(XmlData, "Meta", 0, [], [ "Author", "ReleaseDate", "Version" ], true);
-			
-			writeln(k);
-			writeln(y);
-			
+			this.settings	 = this.XmlParseArray(XmlData, "Value", 0, [ "id", "name" ], [ "Data", "Bool" ], false);
+			this.meta = this.XmlParseArray(XmlData, "Meta", 0, [], [ "Author", "ReleaseDate", "Version" ], true);
+
 			/* Set to true */
 			this.initialized = true;
 		}
@@ -44,6 +34,7 @@ class Config {
 	/** Never, ever write an XML parser like this. Please. **/
 	private ConfigArray[string] XmlParseArray(string XmlData, string tag, int id, string[] attributes, string[] tags, bool useTagForID = false) {
 		ConfigArray[string] all;
+		bool higherTag;
 		
 		auto doc = new Document(XmlData);
 		auto xml = new DocumentParser(XmlData);	
@@ -94,5 +85,35 @@ class Config {
 		}
 				
 		return all;
+	}
+	
+	public static void buildConfig() {
+		string sampleConfigData = "<!-- sample JASL config file -->
+<JASL>
+	<!-- Meta: do not change -->
+	<Meta>
+		<Version>0</Version>
+		<Author>AJ</Author>
+		<ReleaseDate>0</ReleaseDate>
+	</Meta>
+	
+	<!-- Settings: feel free to change -->
+	<Settings> 
+		<Value id=\"0\" name=\"useStrict\">
+			<Data>0</Data>
+			<Bool>0</Bool>
+		</Value>
+		<Value id=\"1\" name=\"useMandate\">
+			<Data>0</Data>
+			<Bool>1</Bool>
+		</Value>
+	</Settings>
+</JASL>";
+		try {
+			std.file.write("./config.xml", sampleConfigData);
+			writeln("New config written to config.xml");
+		} catch ( Exception e ) {
+			writeln("Config write failed. Please do this manually using data from: github.com/jbolt256/jasl/tree/master/meta/config.default.xml");
+		}
 	}
 }

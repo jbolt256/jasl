@@ -1,6 +1,5 @@
 import std.stdio, std.string, std.conv;
 import Compiler.Main, Emulator.Main, config;
-//config;
 
 /**
  * Main: entry point to the program. Everything is setup and called from here. 
@@ -11,8 +10,9 @@ void main(string[] args)
 	auto C = new CompilerMain();
 	auto E = new EmulatorMain();
 	
+	/* Config class is initialized for compiling, emulating, and -config */
 	if ( args.length >= 3 ) {
-	
+		auto Conf = new Config();
 		/* Call compile function. Extra \r\n's for visibility */
 		if ( args[1] == "-c" ) {
 			writeln("\r\nJASL Compiler\r\n");
@@ -33,10 +33,14 @@ void main(string[] args)
 			E.emulate(args[3]);
 		}
 	} else if ( args[1] == "-config" ) {
+		if ( config.Config.initialized != true ) {
 			auto Conf = new Config();
-			writeln("CONFIGURATION DATA: \r\n");
-			//writeln(Config.meta);
-			//writeln(Config.settings);
+			}
+		writeln("CONFIGURATION DATA: \r\n");
+		writeln(config.Config.meta);
+		writeln(Config.settings);
+	} else if ( args[1] == "-buildconfig" ) {
+		Config.buildConfig();
 	} else {
 		writeln("Too few arguments provided.");
 		}

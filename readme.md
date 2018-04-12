@@ -49,13 +49,13 @@ The following are allowed syntaxes for arguments:
 
 Of course, the names used above are placeholders.
 
-### Other
+## Other
 
-## Notepad++
+### Notepad++
 Custom syntax highlighting for notepad++ can be found at meta/notepad++UDL.xml. Follow the instructions listed at the top of that file
 to install highlighting.
 
-## About
+### About
 The official JASL specification (mandate 1.0) will be released sometime if necessary. Otherwise, whatever the compiler does is the official specification.
 
 See readme.txt and meta/mandate1.txt for additional information.
