@@ -6,6 +6,7 @@
 		<Author>AJ</Author>
 		<ReleaseDate>0</ReleaseDate>
 	</Meta>
+	
 	<!-- Settings: feel free to change -->
 	<Settings> 
 		<Value id="0" name="useStrict">
