@@ -8,34 +8,27 @@ struct ConfigValue {
 struct ConfigMetaValue {
 	string Author, Version, ReleaseDate;
 }
-	
+
 class Config { 
 	private	static bool initialized;
 	public static ConfigValue[string] settings;
 	public static ConfigMetaValue[string] meta;
+	private string XmlData;
+	private Document doc;
+	private DocumentParser xml;
 	
 	/* Initialize all configuration values once upon initialization of class */
 	this() {
 		if ( this.initialized != true ) {
-			
 			if ( !std.file.exists("./config.xml") ) {
 				throw new JException("Configuration file does not exist.", 0);
 				}
-				
-			string XmlData = cast(string) std.file.read("./config.xml");
-			auto dom = parseDOM(XmlData);
-			writeln(dom.children[0]);
-			writeln(dom.children[1].children[0]);
-			
-			/*
-			check(s);
-				auto doc = new Document(s);
-				auto xml = new DocumentParser(s);
-				//} catch ( Exception e ) {
-				//throw new JException("Unable to load configuration file.", 0);
-				//}
-			
-			/* Generate standard Value datasets 
+			XmlData = cast(string) std.file.read("./config.xml");			
+			check(XmlData);
+			doc = new Document(XmlData);
+			xml = new DocumentParser(XmlData);				
+
+			/* Generate standard Value datasets */
 			xml.onStartTag["Value"] = (ElementParser xml)
 			{
 				ConfigValue set1;
@@ -49,23 +42,28 @@ class Config {
 				xml.parse();
 				this.settings[set1.Name] = set1;
 			};
-			
-			xml.onStartTag["Meta"] = (ElementParser xml)
-			{
-				ConfigMetaValue meta1;				
-				xml.onEndTag["Author"]       	= (in Element e) { meta1.Author      = e.text(); };
-				xml.onEndTag["ReleaseDate"]   	= (in Element e) { meta1.ReleaseDate      = e.text(); };				
-				xml.onEndTag["Version"]       	= (in Element e) { meta1.Version      = e.text(); };
-				
-				xml.parse();
-				this.meta["all"] = meta1;
-			};
-			
 			xml.parse();
-			*/
+			
+			this.XmlParseArray("Meta", [], [ "Author", "ReleaseDate", "Version" ]);
 			
 			/* Set to true */
 			this.initialized = true;
 		}
+	}
+	
+	private string[string] XmlParseArray(string tag, string[] attributes, string[] tags) {
+		string[string] data1;
+		string mix;
+		
+		xml.onStartTag[tag] = (ElementParser xml)
+		{
+			//xml.onEndTag[tags[0]]       	= (in Element e) { data1[tags[0]]      = e.text(); };			
+			//xml.onEndTag[tags[1]]       	= (in Element e) { data1[tags[2]]      = e.text(); };			
+			xml.parse();
+		};
+		
+		xml.parse();
+		writeln(data1);
+		return data1;
 	}
 }
