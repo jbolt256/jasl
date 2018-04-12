@@ -26,8 +26,8 @@ class Config {
 			} else { 
 				XmlData = cast(string) std.file.read("./config.xml");			
 				check(XmlData);
-				this.settings	 = this.XmlParseArray(XmlData, "Value", 0, [ "id", "name" ], [ "Data", "Bool" ], false);
-				this.meta = this.XmlParseArray(XmlData, "Meta", 0, [], [ "Author", "ReleaseDate", "Version" ], true);
+				this.settings	= this.XmlParseArray(XmlData, "Value", 1, [ "id", "name" ], [ "Data", "Bool" ], false);
+				this.meta 		= this.XmlParseArray(XmlData, "Meta", 0, [], [ "Name", "Author", "ReleaseDate", "Version" ], true);
 
 				/* Set to true */
 				this.initialized = true;
@@ -101,6 +101,7 @@ class Config {
 <JASL>
 	<!-- Meta: do not change -->
 	<Meta>
+		<Name>JASL</Name>
 		<Version>0</Version>
 		<Author>AJ</Author>
 		<ReleaseDate>0</ReleaseDate>

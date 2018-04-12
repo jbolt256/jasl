@@ -11,9 +11,19 @@ void main(string[] args)
 {
 	auto C = new CompilerMain();
 	auto E = new EmulatorMain();
+	
+	/* Create new Config, send to enableConfig() */
 	auto Conf = new Config();
 	enableConfig(Conf);
 	
+	/* Setup conf */
+	writefln(">>>\r\n>>>JASL Version %s, release date %s, mandate specification #%s.\r\n>>>", GlobalConfig.meta["JASL"].tags["Version"], GlobalConfig.meta["JASL"].tags["ReleaseDate"], 
+	GlobalConfig.settings["useMandate"].tags["Data"]);
+	
+	/* This is an inefficient but basic way to handle arguments, since very few arguments need to be
+	 * processed by the app.
+	 */
+	 
 	/* Config class is initialized for compiling, emulating, and -config */
 	if ( args.length >= 3 ) {
 		
@@ -36,13 +46,19 @@ void main(string[] args)
 			writeln("\r\nJASL Emulator \r\n");
 			E.emulate(args[3]);
 		}
+		
+	/* Outputs unformatted, parsed configuration data */
 	} else if ( args[1] == "-config" ) {
 		writeln("CONFIGURATION DATA: \r\n");
 		writeln(Conf.meta);
 		writeln(Conf.settings);
+		
+	/* Builds new config from default */
 	} else if ( args[1] == "-buildconfig" ) {
 		Conf.buildConfig();
+		
+	/* Otherwise, not enough arguments. */
 	} else {
 		writeln("Too few arguments provided.");
-		}
+	}
 }    

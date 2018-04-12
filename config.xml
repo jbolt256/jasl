@@ -2,9 +2,10 @@
 <JASL>
 	<!-- Meta: do not change -->
 	<Meta>
-		<Version>0</Version>
+		<Name>JASL</Name>
+		<Version>0.0.1</Version>
 		<Author>AJ</Author>
-		<ReleaseDate>0</ReleaseDate>
+		<ReleaseDate>April 15, 2018</ReleaseDate>
 	</Meta>
 	
 	<!-- Settings: feel free to change -->

@@ -6,8 +6,8 @@ code, which is in turn read by the emulator. The emulator is designed to act as 
 ## Instructions
 
 ### Requirements
-- D2 language compiler (preferably DMD)
-- 8 MB disk space & ~16MB RAM
+- D language compiler (preferably DMD, must have support for D2)
+- ~8 MB disk space & ~16MB RAM
 - dxml package (available on dub: https://code.dlang.org/packages/dxml)
 
 This project has only been tested on Windows 10. I cannot ensure it will run on any *nix systems or a Mac.
@@ -15,10 +15,6 @@ This project has only been tested on Windows 10. I cannot ensure it will run on 
 ### Building
 This project is written in the D language. You can build this project using the dub package manager or any dlang compiler. The easiest way is to download the 
 dmd compiler from the Digital Mars website and then run the following command:
-
-`$ dmd.exe app.d`
-
-In Windows PowerShell:
 
 `$ ./dmd.exe ./app.d`
 
@@ -33,7 +29,7 @@ Which should place a file called "config.xml" into your current working director
 ### Running
 Once compiled, JASL can be run as such:
 
-`$ app.exe <[-c] [-r] [-cr]> <filename> <fileNameOut>`
+`$ app.exe <[-c] [-r] [-cr] [-config] [-buildconfig]> <filename> <fileNameOut>`
 
 The following are allowed syntaxes for arguments:
 
