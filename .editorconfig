@@ -4,8 +4,9 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
-# Matches multiple files with brace expansion notation
-[*.{js,jsx,html,sass,d}]
+# Change tab size for github display
+# From StackOverflow: https://stackoverflow.com/questions/8833953/how-to-change-tab-size-on-github/23522945#23522945
+[*.{txt,d,xml,jasl}]
 charset = utf-8
 indent_style = tab
 indent_size = 4
