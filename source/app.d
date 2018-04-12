@@ -35,8 +35,8 @@ void main(string[] args)
 	} else if ( args[1] == "-config" ) {
 			auto Conf = new Config();
 			writeln("CONFIGURATION DATA: \r\n");
-			writeln(Config.meta);
-			writeln(Config.settings);
+			//writeln(Config.meta);
+			//writeln(Config.settings);
 	} else {
 		writeln("Too few arguments provided.");
 		}
