@@ -19,8 +19,8 @@ class Modifiers {
 		
 		/* Set attributes for modifiers. */
 		opcodeAttrib = [
-			"XYZ": ModAttrib(63, 2, 10),
 			"ERR": ModAttrib(64, 1, 10),
+			"XYZ": ModAttrib(63, 2, 10),
 			"APL": ModAttrib(62, 3, 3)
 			];
 		}
@@ -59,12 +59,16 @@ class Modifiers {
 				case "BUF": operation = 7; break;
 				default: operation = 7; break;
 				}
-			} catch ( Exception e ) { } catch ( Error e ) {}
+			} catch ( Exception e ) {
+				throw new JException("Unable to process APL shift instruction.", data.inLineNum);
+			} catch ( Error e ) {
+				throw new JException("Unable to process APL shift instruction.", data.inLineNum);			
+			}
 			
 		/* Encode into three 4-bit partitions starting with the leftmost digit */
 		encodedDatabits = CLib.encodeNumber(encodedDatabits, 0, 3, register1);
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 4, 7, register2);
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 8, 11, operation);
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 4, 7, operation);
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 8, 11, register2);
 		
 		/* Output message */
 		ret.cmdlineMsg = "Applying logical " ~ data.args[2] ~ " to registers " ~ data.args[1] ~ " and " ~ data.args[3] ~ ".";

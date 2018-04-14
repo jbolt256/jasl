@@ -30,9 +30,19 @@ class Instructions {
 	}
 	
 	/** :APL		<op>	<reg>	<flags> 
-	 * 20-bit integer. Bits 1 - 4 are opcode, 5 - 8 register, 9 is flags. 
+	 * 20-bit integer. 
 	 */
-	//public ByteLineOut APL(ByteLine Data) {
+	public ByteLineOut APL(ByteLine Data) {
+		int register1, operation, register2;
 		
-	//}
+		lineOut.opcodeStr = "APL";
+		
+		register1 = ELib.extractNumber(Data.databits, 0, 3);
+		operation = ELib.extractNumber(Data.databits, 4, 7);
+		register2 = ELib.extractNumber(Data.databits, 8, 11);
+				
+		lineOut.compilerMsg = "APL.";
+
+		return lineOut;
+	}
 }

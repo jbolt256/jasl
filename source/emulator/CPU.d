@@ -48,6 +48,7 @@ class CPU {
 		switch ( Line.opcode ) {
 			case 64: toReturn = I.ERR(Line); break;
 			case 63: toReturn = I.XYZ(Line); break;
+			case 62: toReturn = I.APL(Line); break;
 			default: toReturn.compilerMsg = "Unidentified opcode."; break;
 		}
 		
