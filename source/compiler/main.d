@@ -85,6 +85,7 @@ class CompilerMain {
 					ILine_current.inLineNum = inLineNum;
 					ILine_current.outLineNum = outLineNum;
 					ILine_current.levelType = fileLineSplit[0][0..1];
+					ILine_all[inLineNum] = ILine_current;
 				} catch ( Error e ) {
 					throw new JException("Compiler was unable to read malformed line.", inLineNum);
 				} catch ( Exception e ) {
@@ -117,9 +118,13 @@ class CompilerMain {
 		 */
 		foreach ( OLine outLine; OLine_all ) {
 			fileLinesOut ~= to!string(OLine_all[i].opcode) ~ "|" ~ to!string(OLine_all[i].databits);
+			
 			if ( outLine.cmdlineMsg != null ) {
 				writeln("" ~ OLine_all[i].modifier ~ "(" ~ to!string(OLine_all[i].inLineNum) ~ ") : " ~ OLine_all[i].cmdlineMsg);
-			}
+			} else {
+				writeln( to!string(OLine_all[i].inLineNum) ~ " : " ~ OLine_all[i].modifier ~ "");
+				}
+			
 			i++;
 		}
 		

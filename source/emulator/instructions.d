@@ -57,7 +57,7 @@ class Instructions {
 			default: operation = 7; break;
 			}
 					
-		lineOut.compilerMsg = "APL.";
+		lineOut.compilerMsg = "Applying logical operation to registers " ~ to!string(register1) ~ " and " ~ to!string(register2) ~ ".";
 
 		return lineOut;
 	}

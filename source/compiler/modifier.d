@@ -27,13 +27,11 @@ class Modifiers {
 		
 	public OLine XYZ(ILine data) {
 		ret.databits = to!int(data.args[1]); // add tools functionality for this
-		ret.cmdlineMsg = "Success.";
 		return ret;
 	}
 	
 	public OLine ERR(ILine data) {
 		ret.databits = 0;
-		ret.cmdlineMsg = "Error.";
 		return ret;
 	}
 	
@@ -77,7 +75,6 @@ class Modifiers {
 		encodedDatabits = CLib.encodeNumber(encodedDatabits, 8, 11, register2);
 		
 		/* Output message */
-		ret.cmdlineMsg = "Applying logical " ~ data.args[2] ~ " to registers " ~ data.args[1] ~ " and " ~ data.args[3] ~ ".";
 		ret.databits = encodedDatabits;
 		
 		return ret;

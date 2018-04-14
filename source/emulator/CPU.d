@@ -5,7 +5,6 @@ import Compiler.Globals, Emulator.Instructions, Compiler.Tools;
 class CPU {
 	public ByteLineOut LineOut;
 	private Instructions I;
-	public bool memInitialized;
 	
 	/** Initialize **/
 	this() {
@@ -26,7 +25,7 @@ class CPU {
 		} catch ( Exception e ) {
 			throw new JEmException("Unable to call instruction.", K.lineNum);
 		}
-		
+				
 		/* Display compilerMsg if necessary */
 		if ( K.compilerMsg != null ) {
 			writeln(K.opcodeStr ~ " (" ~ to!string(K.lineNum) ~ ") " ~ " ~~ " ~ K.compilerMsg);
