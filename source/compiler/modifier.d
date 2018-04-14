@@ -21,7 +21,7 @@ class Modifiers {
 		opcodeAttrib = [
 			"ERR": ModAttrib(64, 1, 10),
 			"XYZ": ModAttrib(63, 2, 10),
-			"APL": ModAttrib(62, 3, 3)
+			"APL": ModAttrib(62, 2, 3)
 			];
 		}
 		
@@ -43,10 +43,16 @@ class Modifiers {
 	 * Encode this so that the first 4 bits are register1, second 4 bits are operation, third 4 bits are register2.
 	 */
 	public OLine APL(ILine data) { 
-		int register1, register2, operation, encodedDatabits;
+		int register1, register2 = 0, operation, encodedDatabits;
+		
 		try {
 			register1 = Mem.reg2Bin(data.args[1]);
-			register2 = Mem.reg2Bin(data.args[3]);
+			
+			/* Only use register2 if needed */
+			if ( data.args.length > 2 ) {
+				register2 = Mem.reg2Bin(data.args[3]);
+			}
+			
 			/* Determine logical shift identifier number */
 			switch ( data.args[2] ) {
 				case "OR": operation = 0; break;

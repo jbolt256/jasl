@@ -5,6 +5,7 @@ import Compiler.Globals, Emulator.Instructions, Compiler.Tools;
 class CPU {
 	public ByteLineOut LineOut;
 	private Instructions I;
+	public bool memInitialized;
 	
 	/** Initialize **/
 	this() {

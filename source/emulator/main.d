@@ -16,6 +16,8 @@ class EmulatorMain {
 		
 		/* Initialize all memory registers */
 		Mem.init();
+		//Proc.memInitialized = true;
+		
 		lines = Compiler.Tools.TFile.getFileLines(filename);
 				
 		foreach ( string line; lines ) {

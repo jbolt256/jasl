@@ -4,7 +4,7 @@ import Compiler.Globals, Compiler.Tools;
 
 class Memory {
 	protected string[int] registers;
-	protected int[int] registerValues;
+	private int[int] registerValues;
 	protected int[int] registerParity;
 	protected float[int] registerRationals;
 	protected bool initialized;
@@ -52,7 +52,11 @@ class Memory {
 	 * Retrieve register value.
 	 */
 	 public int getVal(int register) {
-		return this.registerValues[register];
+		if ( register >= 0 && register <= 15 ) {
+			return this.registerValues[register];
+		} else {
+			return -1;
+		}
 	 }
 	 
 	 /**
@@ -61,11 +65,11 @@ class Memory {
 	 public void setVal(int register, int value) {
 		/* Ensure that values are within specified range (2^20 - 1) and also set parity flags. */
 		if ( value > 1048575 || value < -1048575 ) {
-			throw new JEmException("Register value out of accepted range: -1,048,575 to +1,047,575.");
+			throw new JEmException("Register value out of accepted range: -1,048,575 to +1,048,575.");
 		} else {
 			this.registerValues[register] = value;
 			/* Automatically set parity flags. < 0 is negative. */
-			if ( this.registerValues[register] < 0 ) {
+			if ( value < 0 ) {
 				this.registerParity[register] = 1;
 			} else {
 				this.registerParity[register] = 0;
