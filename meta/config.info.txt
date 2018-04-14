@@ -1,0 +1,6 @@
+The <Meta> section is not to be edited.
+
+<Settings>
+	<Value name="useStrict">: to be implemented in the future (maybe), this would disallow certain syntaxes.
+	<Value name="useMandate">: determine the mandate to be used. Default is 1. "2" would refer to mandate 2, for example.
+</Settings>

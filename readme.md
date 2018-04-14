@@ -51,7 +51,9 @@ Of course, the names used above are placeholders.
 Custom syntax highlighting for notepad++ can be found at meta/notepad++UDL.xml. Follow the instructions listed at the top of that file
 to install highlighting.
 
+For best formatting, use a tab-indent equal to 4 spaces.
+
 ### About
 The official JASL specification (mandate 1.0) will be released sometime if necessary. Otherwise, whatever the compiler does is the official specification.
 
-See readme.txt and meta/mandate1.txt for additional information.
+See readme.txt and meta/mandates/mandate1.txt for additional information.

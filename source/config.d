@@ -114,7 +114,7 @@ class Config {
 			<Bool>0</Bool>
 		</Value>
 		<Value id=\"1\" name=\"useMandate\">
-			<Data>0</Data>
+			<Data>1</Data>
 			<Bool>1</Bool>
 		</Value>
 	</Settings>
