@@ -16,7 +16,6 @@ class EmulatorMain {
 		
 		/* Initialize all memory registers */
 		Mem.init();
-		//Proc.memInitialized = true;
 		
 		lines = Compiler.Tools.TFile.getFileLines(filename);
 				
@@ -31,8 +30,10 @@ class EmulatorMain {
 				JEmInstLine			= lineNum;
 				Proc.send(SendLine);
 			} catch ( Error e ) {
+				writeln(e);
 				throw new JEmException("Unable to resolve data from file.", lineNum);
-			} catch ( Exception e ) {				
+			} catch ( Exception e ) {	
+				writeln(e);
 				throw new JEmException("Unable to resolve data from file.", lineNum);
 			}
 			

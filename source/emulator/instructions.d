@@ -43,8 +43,7 @@ class Instructions {
 		
 		register1Value = Mem.getVal(register1);
 		register2Value = Mem.getVal(register2);
-		
-		
+				
 		/* Apply logical operations to register values */
 		switch ( operation ) {
 			case 0: result = register1Value | register2Value; break;
@@ -57,9 +56,7 @@ class Instructions {
 			case 7: result = register1Value; break;
 			default: operation = 7; break;
 			}
-			
-		writeln(result);
-		
+					
 		lineOut.compilerMsg = "APL.";
 
 		return lineOut;

@@ -54,4 +54,4 @@ struct ByteLineOut {
  */
 void enableConfig(Config c) {
 	GlobalConfig = c;
-	}
+}

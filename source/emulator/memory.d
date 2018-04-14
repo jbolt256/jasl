@@ -1,26 +1,26 @@
 module Emulator.Memory;
+
 import std.conv, std.string, std.stdio, std.algorithm;
 import Compiler.Globals, Compiler.Tools;
 
-class Memory {
-	protected string[int] registers;
-	private int[int] registerValues;
-	protected int[int] registerParity;
-	protected float[int] registerRationals;
-	protected bool initialized;
+class Memory : MemoryData {
+	private string[int] registers;
 	
 	/** 
 	 * Initialize all registers to zero upon
 	 */
 	public void init() {
 		int i = 0;
-		while ( i < 16 ) {
-			this.registerValues[i] = 0;
-			this.registerParity[i] = 0;
-			i++;
-			}
-		this.initialized = true;
+		
+		if ( MemoryData.initialized != true ) { 
+			while ( i < 16 ) {
+				MemoryData.registerValues[i] = 0;
+				MemoryData.registerParity[i] = 0;
+				i++;
+				}
+			MemoryData.initialized = true;
 		}
+	}
 		
 	/** 
 	  * UPDATE: registers are now numbers prefixed with a $. No using words anymore (i.e. no 'CRGA', 'CRGB', etc..)
@@ -45,7 +45,6 @@ class Memory {
 		} catch ( Error e ) {
 			throw new JException("Unable to resolve register integer ID.");
 		}
-		
 	}
 	
 	/**
@@ -53,7 +52,7 @@ class Memory {
 	 */
 	 public int getVal(int register) {
 		if ( register >= 0 && register <= 15 ) {
-			return this.registerValues[register];
+			return MemoryData.registerValues[register];
 		} else {
 			return -1;
 		}
@@ -67,13 +66,23 @@ class Memory {
 		if ( value > 1048575 || value < -1048575 ) {
 			throw new JEmException("Register value out of accepted range: -1,048,575 to +1,048,575.");
 		} else {
-			this.registerValues[register] = value;
+			MemoryData.registerValues[register] = value;
 			/* Automatically set parity flags. < 0 is negative. */
 			if ( value < 0 ) {
-				this.registerParity[register] = 1;
+				MemoryData.registerParity[register] = 1;
 			} else {
-				this.registerParity[register] = 0;
+				MemoryData.registerParity[register] = 0;
 			}
 		}
 	 }
+}
+
+/** 
+ * MemoryData is a dummy class that holds memory information.
+ */
+class MemoryData {
+	private static int[int] registerValues;
+	private static int[int] registerParity;
+	private static float[int] registerRationals;
+	public static bool initialized;
 }
