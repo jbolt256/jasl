@@ -1,12 +1,13 @@
 module Emulator.Instructions;
 import std.conv, std.stdio, std.string, std.format;
-import Compiler.Globals, Compiler.Tools, Emulator.Memory, Emulator.Functions;
+import Compiler.Globals, Compiler.Tools, Emulator.Memory, Emulator.Functions, Main.Library;
 
 class Instructions {
 	/* This variable is reset by the CPU every line */
 	public ByteLineOut lineOut;
 	private Memory Mem;
 	private ELibrary ELib;
+	private Library Lib;
 	
 	/**
 	 * Initialize Memory:: class
@@ -14,6 +15,7 @@ class Instructions {
 	this() {
 		Mem = new Memory();
 		ELib = new ELibrary();
+		Lib = new Library();
 	}
 
 	/* ERR Cmd */
@@ -54,7 +56,7 @@ class Instructions {
 			case 5: result = ~(register1Value ^ register2Value); break;
 			case 6: result = ~register1Value; break;
 			case 7: result = register1Value; break;
-			default: operation = 7; break;
+			default: result = register1Value; break;
 			}
 					
 		lineOut.compilerMsg = format("Applying logical operation #%s to registers %s and %s.", operation, register1, register2);

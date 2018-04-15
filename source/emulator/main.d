@@ -10,7 +10,6 @@ class EmulatorMain {
 		ByteLine SendLine;
 		auto Proc = new CPU();
 		auto Mem = new Memory();
-		
 		int lineNum = 1;
 		string[] linePipeSplit, lines;
 		

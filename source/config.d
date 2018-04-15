@@ -37,10 +37,10 @@ class Config {
 	
 	/** 
 	 * Never, ever write an XML parser like this. Please. 
+	 * The std.xml library is out of date, so this is the (current) best way I know of doing this.
 	 **/
 	private ConfigArray[string] XmlParseArray(string XmlData, string tag, int id, string[] attributes, string[] tags, bool useTagForID = false) {
 		ConfigArray[string] all;
-		bool higherTag;
 		
 		auto doc = new Document(XmlData);
 		auto xml = new DocumentParser(XmlData);	
