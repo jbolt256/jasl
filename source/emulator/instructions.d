@@ -1,5 +1,5 @@
 module Emulator.Instructions;
-import std.conv, std.stdio, std.string;
+import std.conv, std.stdio, std.string, std.format;
 import Compiler.Globals, Compiler.Tools, Emulator.Memory, Emulator.Functions;
 
 class Instructions {
@@ -57,7 +57,7 @@ class Instructions {
 			default: operation = 7; break;
 			}
 					
-		lineOut.compilerMsg = "Applying logical operation to registers " ~ to!string(register1) ~ " and " ~ to!string(register2) ~ ".";
+		lineOut.compilerMsg = format("Applying logical operation #%s to registers %s and %s.", operation, register1, register2);
 
 		return lineOut;
 	}

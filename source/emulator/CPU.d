@@ -1,5 +1,5 @@
 module Emulator.CPU;
-import std.stdio, std.conv, std.string, std.math, std.algorithm;
+import std.stdio, std.conv, std.string, std.math, std.algorithm, std.format;
 import Compiler.Globals, Emulator.Instructions, Compiler.Tools;
 
 class CPU {
@@ -28,7 +28,9 @@ class CPU {
 				
 		/* Display compilerMsg if necessary */
 		if ( K.compilerMsg != null ) {
-			writeln(K.opcodeStr ~ " (" ~ to!string(K.lineNum) ~ ") " ~ " ~~ " ~ K.compilerMsg);
+			writefln("%s : %s () ~~ %s", K.lineNum, K.opcodeStr, K.compilerMsg);
+		} else {
+			writefln("%s : %s ()", K.lineNum, K.opcodeStr, K.compilerMsg);
 		}
 		
 		return K;

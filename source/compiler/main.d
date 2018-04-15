@@ -12,7 +12,10 @@ class CompilerMain {
 		JC = new JCMain();
 	}
 	
-	/** Compiler **/
+	/** 
+	 * This controls the entire compiler routine. The only improvement, I think, would be to output the byte line 
+	 * as soon as it is formatted, not all of the lines at the end.
+	 */
 	public void compile(string filenameIn, string filenameOut) {
 		/* Just a note: line numbers start at 1, not 0 */
 		int inLineNum = 1, outLineNum = 1, i = 1, doubleHashes = 0;
@@ -94,9 +97,9 @@ class CompilerMain {
 					OLine_current = this.send(ILine_current);
 				}
 				
-				/* Only increment outLineNum if send was a success */
-				if ( OLine_current.opcode != -1 ) {
-					OLine_all[outLineNum] = OLine_current;
+				/* Only increment outLineNum if send was a success, also if opcode is <65 and >-1 (i.e 0..64) */
+				if ( OLine_current.opcode > -1 && OLine_current.opcode < 65 ) {
+					OLine_all[outLineNum] = OLine_current;			
 					outLineNum++;
 				}
 				
@@ -116,14 +119,15 @@ class CompilerMain {
 		 * moving towards the first. I use an index variable (i) to prevent this. (However, the backwards reading
 		 * would make for a neat feature).
 		 */
+		 
 		foreach ( OLine outLine; OLine_all ) {
 			fileLinesOut ~= to!string(OLine_all[i].opcode) ~ "|" ~ to!string(OLine_all[i].databits);
 			
 			if ( outLine.cmdlineMsg != null ) {
-				writeln("" ~ OLine_all[i].modifier ~ "(" ~ to!string(OLine_all[i].inLineNum) ~ ") : " ~ OLine_all[i].cmdlineMsg);
+				writefln("%s : %s () ~~ %s", OLine_all[i].inLineNum,  OLine_all[i].modifier, OLine_all[i].cmdlineMsg);
 			} else {
-				writeln( to!string(OLine_all[i].inLineNum) ~ " : " ~ OLine_all[i].modifier ~ "");
-				}
+				writefln("%s : %s () ~~",  OLine_all[i].inLineNum,  OLine_all[i].modifier);
+			}
 			
 			i++;
 		}
