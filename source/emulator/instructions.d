@@ -39,9 +39,9 @@ class Instructions {
 		
 		lineOut.opcodeStr = "APL";
 		
-		register1 = ELib.extractNumber(Data.databits, 0, 3);
-		operation = ELib.extractNumber(Data.databits, 4, 7);
-		register2 = ELib.extractNumber(Data.databits, 8, 11);
+		register1 = ELib.extractNumber(Data.databits, 0, 5);
+		operation = ELib.extractNumber(Data.databits, 6, 9);
+		register2 = ELib.extractNumber(Data.databits, 10, 15);
 		
 		register1Value = Mem.getVal(register1);
 		register2Value = Mem.getVal(register2);

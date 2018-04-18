@@ -63,10 +63,10 @@ class Modifiers {
 				throw new JException("Unable to process APL shift instruction.", data.inLineNum);			
 			}
 			
-		/* Encode into three 4-bit partitions starting with the leftmost digit */
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 0, 3, register1);
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 4, 7, operation.id);
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 8, 11, register2);
+		/* Encode into two 6-bit partitions and one 4-bit partition starting with the leftmost digit */
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 0, 5, register1);
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 6, 9, operation.id);
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 10, 15, register2);
 		
 		/* Output message */
 		ret.databits = encodedDatabits;

@@ -13,7 +13,7 @@ class Memory : MemoryData {
 		int i = 0;
 		
 		if ( MemoryData.initialized != true ) { 
-			while ( i < 16 ) {
+			while ( i < 64 ) {
 				MemoryData.registerValues[i] = 0;
 				MemoryData.registerParity[i] = 0;
 				i++;
@@ -31,13 +31,13 @@ class Memory : MemoryData {
 		try { 
 			/* Since register values are prefixed by $, check to see if such a number exists */
 			if ( canFind(reg, "$") ) {
-				regReturn = to!int(reg.split("$")[1]);
+				regReturn = parse!int(reg.split("$")[1], 16);
 			} else {
 				throw new JException("Cannot determine register. Missing a '?' perhaps?");
 			}
 			
-			/* Registers cannot be less than 0 or greater than 15. */
-			if ( regReturn >= 0 && regReturn <= 15 ) {
+			/* Registers cannot be less than 0 or greater than 63. */
+			if ( regReturn >= 0 && regReturn <= 63 ) {
 				return regReturn;
 			} else { 
 				throw new JException("Register not found.");
@@ -51,7 +51,7 @@ class Memory : MemoryData {
 	 * Retrieve register value.
 	 */
 	 public int getVal(int register) {
-		if ( register >= 0 && register <= 15 ) {
+		if ( register >= 0 && register <= 63 ) {
 			return MemoryData.registerValues[register];
 		} else {
 			return -1;
