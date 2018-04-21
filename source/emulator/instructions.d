@@ -3,7 +3,7 @@ import std.conv, std.stdio, std.string, std.format;
 import Compiler.Globals, Compiler.Tools, Emulator.Memory, Emulator.Functions, Main.Library;
 
 class Instructions {
-	/* This variable is reset by the CPU every line */
+	/* This next variable is reset by the CPU every line */
 	public ByteLineOut lineOut;
 	private Memory Mem;
 	private ELibrary ELib;

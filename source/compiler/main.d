@@ -1,8 +1,9 @@
 module Compiler.Main;
 import std.string, std.conv, std.stdio, std.algorithm;
-import Compiler.Tools, Compiler.Globals, Compiler.Modifier, Compiler.JC;
+import Compiler.Tools, Compiler.Globals, Compiler.Modifier;
 
 class CompilerMain {
+
 	private Modifiers M;
 	private JCMain JC;
 	

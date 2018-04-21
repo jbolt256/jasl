@@ -6,7 +6,7 @@ class ELibrary {
 	/**
 	 * Extract the integer value of the binary digits of an integer between start and end INCLUSIVE!.
 	 * Inverse of this is CLibrary.encodeNumber(). Both functions are ZERO-INDEXED: the first digit
-	 * is the zeroeth digit.
+	 * is the zeroeth digit -- except for the BitLength variable, which is not. 
 	 */
 	public int extractNumber(int num, ushort start, ushort end, int bitLength = 20) {
 		int remainder;
