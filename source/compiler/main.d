@@ -157,6 +157,7 @@ class CompilerMain {
 					case "XYZ": toReturn = M.XYZ(data); break;
 					case "ERR": toReturn = M.ERR(data); break;
 					case "APL": toReturn = M.APL(data); break;
+					//case "ADD": toReturn = M.ADD(data); break;
 					default: 
 						throw new JException("Opcode does not exist.", data.inLineNum);
 				}	

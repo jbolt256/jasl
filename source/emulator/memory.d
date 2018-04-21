@@ -58,6 +58,10 @@ class Memory : MemoryData {
 		}
 	 }
 	 
+	public int getParity(int register) {
+		return MemoryData.registerParity[register];
+	}
+	 
 	 /**
 	  * Set register value. Automatically sets parity flag as well.
 	  */
