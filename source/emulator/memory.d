@@ -70,11 +70,12 @@ class Memory : MemoryData {
 		if ( value > 1048575 || value < -1048575 ) {
 			throw new JEmException("Register value out of accepted range: -1,048,575 to +1,048,575.");
 		} else {
-			MemoryData.registerValues[register] = value;
 			/* Automatically set parity flags. < 0 is negative. */
 			if ( value < 0 ) {
+				MemoryData.registerValues[register] = -value;
 				MemoryData.registerParity[register] = 1;
 			} else {
+				MemoryData.registerValues[register] = value;
 				MemoryData.registerParity[register] = 0;
 			}
 		}

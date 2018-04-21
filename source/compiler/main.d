@@ -5,12 +5,12 @@ import Compiler.Tools, Compiler.Globals, Compiler.Modifier;
 class CompilerMain {
 
 	private Modifiers M;
-	private JCMain JC;
+	//private JCMain JC;
 	
 	/** Initialize necessary classes **/
 	this() {
 		M = new Modifiers();
-		JC = new JCMain();
+		//JC = new JCMain();
 	}
 	
 	/** 
@@ -157,7 +157,7 @@ class CompilerMain {
 					case "XYZ": toReturn = M.XYZ(data); break;
 					case "ERR": toReturn = M.ERR(data); break;
 					case "APL": toReturn = M.APL(data); break;
-					//case "ADD": toReturn = M.ADD(data); break;
+					case "ADD": toReturn = M.ADD(data); break;
 					default: 
 						throw new JException("Opcode does not exist.", data.inLineNum);
 				}	
