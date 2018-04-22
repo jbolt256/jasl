@@ -65,9 +65,9 @@ class Modifiers {
 			}
 			
 		/* Encode into two 6-bit partitions and one 4-bit partition starting with the leftmost digit */
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 0, 5, register1);
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 6, 9, operation.id);
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 10, 15, register2);
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 1, 6, register1);
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 7, 12, operation.id);
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 13, 18, register2);
 		
 		/* Output message */
 		ret.databits = encodedDatabits;
@@ -90,8 +90,8 @@ class Modifiers {
 			regFlag = 1;
 		}
 		
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 0, 1, regFlag);		
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 1, 19, register2);
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 1, 1, regFlag);		
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 2, 20, register2);
 		
 		ret.auxbits  = Mem.reg2Bin(data.args[1]);
 		ret.databits = encodedDatabits;

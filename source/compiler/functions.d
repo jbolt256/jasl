@@ -4,7 +4,7 @@ import Compiler.Tools, Compiler.Globals;
 
 class CLibrary {
 	/** 
-	 * Encode a number into an integer of a fixed-length.
+	 * Encode a number into an integer of a fixed-length. Not zero-indexed.
 	 * Inverse of this is ELibrary.extractNumber()
 	 */
 	public int encodeNumber(int num, int start, int end, int value, int bitLength = 20) {

@@ -39,9 +39,9 @@ class Instructions {
 		
 		lineOut.opcodeStr = "APL";
 		
-		register1 = ELib.extractNumber(Data.databits, 0, 5);
-		operation = ELib.extractNumber(Data.databits, 6, 9);
-		register2 = ELib.extractNumber(Data.databits, 10, 15);
+		register1 = ELib.extractNumber(Data.databits, 1, 6);
+		operation = ELib.extractNumber(Data.databits, 7, 12);
+		register2 = ELib.extractNumber(Data.databits, 13, 18);
 		
 		register1Value = Mem.getVal(register1);
 		register2Value = Mem.getVal(register2);
@@ -71,7 +71,7 @@ class Instructions {
 		
 		reg1Name = Data.auxbits;
 		regFlag  = ELib.extractNumber(Data.databits, 1, 1);
-		reg2Name = ELib.extractNumber(Data.databits, 1, 19);
+		reg2Name = ELib.extractNumber(Data.databits, 2, 20);
 		//reg3Name = ELib.extractNumber(Data.databits, 12, 17);
 		
 		writeln(regFlag, reg2Name);

@@ -5,12 +5,19 @@ import Compiler.Tools, Compiler.Globals;
 class ELibrary {
 	/**
 	 * Extract the integer value of the binary digits of an integer between start and end INCLUSIVE!.
-	 * Inverse of this is CLibrary.encodeNumber(). Both functions are ZERO-INDEXED: the first digit
-	 * is the zeroeth digit -- except for the BitLength variable, which is not. 
+	 * Inverse of this is CLibrary.encodeNumber(). Both functions are not ZERO-INDEXED: the first digit
+	 * is the first digit -- except for the BitLength variable, which is not. 
 	 */
 	public int extractNumber(int num, ushort start, ushort end, int bitLength = 20) {
 		int remainder;
 		float result, floatNum = to!float(num);
+		
+		/* The mathematics below is zero-indexed, but the inverse of this function (encoding) is not zero-indexed,
+		 * so we decrement these numbers by one. This zero-indexes the numbers whilst also allowing this to be the
+		 * inverse of encodeNumber().
+		 */
+		start--;
+		end--;
 		
 		if ( bitLength - start == 0 ) { 
 			remainder = num;
