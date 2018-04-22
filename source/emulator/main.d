@@ -26,6 +26,7 @@ class EmulatorMain {
 				linePipeSplit 		= line.split("|");
 				SendLine.opcode 	= to!int(strip(linePipeSplit[0]));
 				SendLine.databits 	= to!int(strip(linePipeSplit[1]));
+				SendLine.auxbits	= to!int(strip(linePipeSplit[2]));
 				SendLine.lineNum	= lineNum;
 				JEmInstLine			= lineNum;
 				Proc.send(SendLine);

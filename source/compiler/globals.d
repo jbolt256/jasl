@@ -2,6 +2,7 @@ module Compiler.Globals;
 import Main.Configuration;
 
 Config GlobalConfig;
+
 const uint JASL_vers= 1000;
 bool JASL_strict	= false;		// not yet a feature
 bool JASL_usingJC	= false;		// the compiler will set this if needed
@@ -22,7 +23,7 @@ struct ILine {
  * This struct contains all the data needed to form an output line.
  */
 struct OLine {
-	int opcode, databits;
+	int opcode, databits, auxbits;
 	int inLineNum, outLineNum;
 	string compilerMsg, cmdlineMsg, modifier;
 }
@@ -40,7 +41,7 @@ struct ModAttrib {
   * lines that have already been compiled by the JASL compiler.
   */
 struct ByteLine {
-	int opcode, databits, lineNum;
+	int opcode, databits, lineNum, auxbits;
 }
 
 struct ByteLineOut {

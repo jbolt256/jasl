@@ -80,33 +80,22 @@ class Modifiers {
 	 * Which adds registers 3 and 1 together, then writes to register 3.
 	 */
 	public OLine ADD(ILine data) {
-		int register1, register2, register3, register1Parity, register2Parity, r = 1500000;
+		int register2, encodedDatabits, regFlag;
 		
-		try { 
-			register1 = Mem.getVal(Mem.reg2Bin(data.args[1]));
-			register1Parity = Mem.getParity(Mem.reg2Bin(data.args[1]));
-
-			if ( data.args[2][0..1] == "$" ) { 
-				register2 = Mem.getVal(Mem.reg2Bin(data.args[2]));
-				register2Parity = Mem.getParity(Mem.reg2Bin(data.args[2]));
-			} else {
-				register2 = to!int(data.args[2]);
-				if ( register2 < 0 ) { register2Parity = 1; } else { register2Parity = 0; }
-			}
-						
-			if ( register1Parity == 0 && register2Parity == 0 ) { r = register1 + register2;  } 
-			if ( register1Parity == 1 && register2Parity == 1 ) { r = -(register1 + register2); }
-			
-			if ( r == 1500000 ) { 
-				switch ( register1 > register2 ) {
-					case true: if ( register1Parity == 0 ) { r = register1 - register2; } else { r = -(register1 - register2); }; break;
-					case false: if ( register1Parity == 0 ) { r = -(register2 - register1); } else { r = register2 - register1; }; break;
-					default: r = 2; break;
-				}
-			}
-		} catch ( Exception e ) { writeln(e); } catch ( Error e ) { writeln(e); }
+		if ( data.args[2][0..1] == "$" ) { 
+			register2 = Mem.reg2Bin(data.args[2]);
+			regFlag = 0;
+		} else {
+			register2 = Compiler.Tools.Extra.formatNumber(data.args[2]);
+			regFlag = 1;
+		}
 		
-		writeln(r);
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 1, 19, register2);
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 0, 1, regFlag);
+		//encodedDatabits = CLib.encodeNumber(encodedDatabits, 12, 17, Mem.reg2Bin(data.args[3]));
+		
+		ret.auxbits  = Mem.reg2Bin(data.args[1]);
+		ret.databits = encodedDatabits;
 		
 		return ret;
 	}

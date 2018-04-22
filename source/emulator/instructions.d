@@ -63,4 +63,45 @@ class Instructions {
 
 		return lineOut;
 	}
+	
+	public ByteLineOut ADD(ByteLine Data) { 
+		int register1Parity, register2Parity;
+		int reg1Name, reg2Name, reg3Name, regFlag;
+		int register1, register2, register3, r = 1500000, encodedDatabits;
+		
+		reg1Name = Data.auxbits;
+		reg2Name = ELib.extractNumber(Data.databits, 2, 19);
+		regFlag  = ELib.extractNumber(Data.databits, 0, 1);
+		//reg3Name = ELib.extractNumber(Data.databits, 12, 17);
+		
+		/* This convoluted adding system is how the computer would add digits, oddly enough */
+		try { 
+			register1 = Mem.getVal(reg1Name);
+			register1Parity = Mem.getParity(reg1Name);
+
+			if ( regFlag == 0 ) { 
+				register2 = Mem.getVal(reg2Name);
+				register2Parity = Mem.getParity(reg2Name);
+			} else {
+				register2 = to!int(reg2Name);
+				if ( register2 < 0 ) { register2Parity = 1; } else { register2Parity = 0; }
+			}
+						
+			if ( register1Parity == 0 && register2Parity == 0 ) { r = register1 + register2;  } 
+			if ( register1Parity == 1 && register2Parity == 1 ) { r = -(register1 + register2); }
+			
+			if ( r == 1500000 ) { 
+				switch ( register1 > register2 ) {
+					case true: if ( register1Parity == 0 ) { r = register1 - register2; } else { r = -(register1 - register2); }; break;
+					case false: if ( register1Parity == 0 ) { r = -(register2 - register1); } else { r = register2 - register1; }; break;
+					default: r = 2; break;
+				}
+			}
+			
+			Mem.setVal(0, r); /* Write to register 0 for now */
+			
+		} catch ( Exception e ) { writeln(e); } catch ( Error e ) { writeln(e); }
+		
+		return lineOut;
+	}
 }

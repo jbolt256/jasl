@@ -122,7 +122,7 @@ class CompilerMain {
 		 */
 		 
 		foreach ( OLine outLine; OLine_all ) {
-			fileLinesOut ~= to!string(OLine_all[i].opcode) ~ "|" ~ to!string(OLine_all[i].databits);
+			fileLinesOut ~= format("%s|%s|%s", OLine_all[i].opcode, OLine_all[i].databits, OLine_all[i].auxbits);
 			
 			if ( outLine.cmdlineMsg != null ) {
 				writefln("%s : %s () ~~ %s", OLine_all[i].inLineNum,  OLine_all[i].modifier, OLine_all[i].cmdlineMsg);
