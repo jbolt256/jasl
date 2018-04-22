@@ -17,11 +17,15 @@ class CLibrary {
 		if ( value > 0 ) { 
 			if ( value < pow(2, end - start + 1) ) {
 				/* Multiply this number to be inserted by 2^n, where n is the number of digits to the right of the endpoint */
-				num = num + ( value * pow(2, bitLength - end - 1));
+				if ( (bitLength - end - 1) == 0 ) { 
+					num = num + value;
 				} else {
-				throw new JException("Number too large to encode.");
+					num = num + ( value * pow(2, bitLength - end));	
 				}
+			} else {
+				throw new JException("Number too large to encode.");
 			}
+		}
 		return num;
 	}
 }

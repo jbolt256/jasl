@@ -70,9 +70,11 @@ class Instructions {
 		int register1, register2, register3, r = 1500000, encodedDatabits;
 		
 		reg1Name = Data.auxbits;
-		reg2Name = ELib.extractNumber(Data.databits, 2, 19);
-		regFlag  = ELib.extractNumber(Data.databits, 0, 1);
+		regFlag  = ELib.extractNumber(Data.databits, 1, 1);
+		reg2Name = ELib.extractNumber(Data.databits, 1, 19);
 		//reg3Name = ELib.extractNumber(Data.databits, 12, 17);
+		
+		writeln(regFlag, reg2Name);
 		
 		/* This convoluted adding system is how the computer would add digits, oddly enough */
 		try { 
@@ -97,6 +99,8 @@ class Instructions {
 					default: r = 2; break;
 				}
 			}
+			
+			writeln(r);
 			
 			Mem.setVal(0, r); /* Write to register 0 for now */
 			

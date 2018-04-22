@@ -90,9 +90,8 @@ class Modifiers {
 			regFlag = 1;
 		}
 		
+		encodedDatabits = CLib.encodeNumber(encodedDatabits, 0, 1, regFlag);		
 		encodedDatabits = CLib.encodeNumber(encodedDatabits, 1, 19, register2);
-		encodedDatabits = CLib.encodeNumber(encodedDatabits, 0, 1, regFlag);
-		//encodedDatabits = CLib.encodeNumber(encodedDatabits, 12, 17, Mem.reg2Bin(data.args[3]));
 		
 		ret.auxbits  = Mem.reg2Bin(data.args[1]);
 		ret.databits = encodedDatabits;

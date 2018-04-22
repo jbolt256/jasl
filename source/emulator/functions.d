@@ -12,7 +12,12 @@ class ELibrary {
 		int remainder;
 		float result, floatNum = to!float(num);
 		
-		remainder = num % pow(2, bitLength - start);
+		if ( bitLength - start == 0 ) { 
+			remainder = num;
+		} else {
+			remainder = num % pow(2, bitLength - start);
+		}
+		
 		result = floor(to!float(remainder) / pow(2, (bitLength - end - 1)));
 		
 		/* Should already be integer, but just to be sure... */
