@@ -46,7 +46,7 @@ class Library {
 	}
 	
 	/** 
-	 * Quick operation for getting parity of a number. 1 is negative, 0 is positive.
+	 * Quick operation for getting parity of a number. 1 is negative, 0 is nonnegative.
 	 */
 	public int parity(int number) { 
 		if ( number < 0 ) {

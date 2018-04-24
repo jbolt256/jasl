@@ -1,4 +1,5 @@
 module Emulator.Instructions;
+
 import std.conv, std.stdio, std.string, std.format;
 import Compiler.Globals, Compiler.Tools, Emulator.Memory, Emulator.Functions, Main.Library;
 

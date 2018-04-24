@@ -1,4 +1,5 @@
 module Emulator.CPU;
+
 import std.stdio, std.conv, std.string, std.math, std.algorithm, std.format;
 import Compiler.Globals, Emulator.Instructions, Compiler.Tools;
 

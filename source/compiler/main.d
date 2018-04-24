@@ -1,4 +1,5 @@
 module Compiler.Main;
+
 import std.string, std.conv, std.stdio, std.algorithm;
 import Compiler.Tools, Compiler.Globals, Compiler.Modifier;
 
