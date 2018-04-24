@@ -54,12 +54,16 @@ class Memory : MemoryData {
 		if ( register >= 0 && register <= 63 ) {
 			return MemoryData.registerValues[register];
 		} else {
-			return -1;
+			throw new JException("Register number is too large (<0 or >63).");
 		}
 	 }
 	 
 	public int getParity(int register) {
-		return MemoryData.registerParity[register];
+		if ( register >=0 && register <= 63 ) { 
+			return MemoryData.registerParity[register];
+		} else { 
+			throw new JException("Register number is too large (<0 or >63).");			
+		}
 	}
 	 
 	 /**

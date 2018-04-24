@@ -154,8 +154,8 @@ class CompilerMain {
 		try { 
 			if ( M.opcodeAttrib[data.modifier].minArgs <= data.argc ) {
 				switch ( data.modifier ) {
-					case "XYZ": toReturn = M.XYZ(data); break;
 					case "ERR": toReturn = M.ERR(data); break;
+					case "XYZ": toReturn = M.XYZ(data); break;
 					case "APL": toReturn = M.APL(data); break;
 					case "ADD": toReturn = M.ADD(data); break;
 					default: 
