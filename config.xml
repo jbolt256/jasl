@@ -3,23 +3,27 @@
 	<!-- Meta: do not change -->
 	<Meta>
 		<Name>JASL</Name>
-		<Version>0.0.1</Version>
+		<Version>0.0.0</Version>
 		<Author>AJ</Author>
-		<ReleaseDate>April 22, 2018</ReleaseDate>
+		<ReleaseDate>April 29, 2018</ReleaseDate>
 	</Meta>
 	
 	<!-- Settings: feel free to change -->
 	<Settings> 
 		<Value id="0" name="useStrict">
 			<Data>0</Data>
-			<Bool>0</Bool>
+			<Bool>False</Bool>
 		</Value>
 		
 		<Value id="1" name="useMandate">
 			<Data>1</Data>
-			<Bool>1</Bool>
+			<Bool>True</Bool>
 		</Value>
 		
+		<Value id="2" name="useTabs">
+			<Data>    </Data>
+			<Bool>True</Bool>
+		</Value>
 	</Settings>
 </JASL>
 		

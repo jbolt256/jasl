@@ -2,3 +2,4 @@
 :ERR
 :XYZ	64
 :APL	$0		XOR		$1
+:ADD	$1		2425	$0

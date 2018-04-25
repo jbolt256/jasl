@@ -111,11 +111,15 @@ class Config {
 	<Settings> 
 		<Value id=\"0\" name=\"useStrict\">
 			<Data>0</Data>
-			<Bool>0</Bool>
+			<Bool>False</Bool>
 		</Value>
 		<Value id=\"1\" name=\"useMandate\">
 			<Data>1</Data>
-			<Bool>1</Bool>
+			<Bool>True</Bool>
+		</Value>
+		<Value id=\"2\" name=\"useTabs\">
+			<Data>0</Data>
+			<Bool>True</Bool>
 		</Value>
 	</Settings>
 </JASL>";

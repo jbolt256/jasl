@@ -3,4 +3,5 @@ The <Meta> section is not to be edited.
 <Settings>
 	<Value name="useStrict">: to be implemented in the future (maybe), this would disallow certain syntaxes.
 	<Value name="useMandate">: determine the mandate to be used. Default is 1. "2" would refer to mandate 2, for example.
+	<Value name="useTabs">: if the Bool tag is set to false, it will use the characters in the Data tag as the delimiter for splitting up JASL programs. Otherwise, the compiler will use tabs.
 </Settings>

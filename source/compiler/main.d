@@ -22,6 +22,7 @@ class CompilerMain {
 		/* Just a note: line numbers start at 1, not 0 */
 		int inLineNum = 1, outLineNum = 1, i = 1, doubleHashes = 0;
 		bool isNormalLine, isCommented = false;
+		string splitDelimiter;
 		
 		ILine ILine_current;
 		ILine[int] ILine_all;
@@ -34,6 +35,13 @@ class CompilerMain {
 		string[] fileLines, fileLineSplit, fileLinesOut, fileLineSplit_before;
 
 		fileLines = Compiler.Tools.TFile.getFileLines(filenameIn);
+		
+		/* If useTabs is true, use tabs; otherwise, use spaces. */
+		if ( to!bool(GlobalConfig.settings["useTabs"].tags["Bool"]) ) {
+			splitDelimiter = "	";
+		} else {
+			splitDelimiter = GlobalConfig.settings["useTabs"].tags["Data"];
+		}
 		
 		foreach ( string fileLine; fileLines ) {
 			/* Support for double-commented lines 
@@ -67,9 +75,9 @@ class CompilerMain {
 				 * Otherwise, split string only once by tab.
 				 */			
 				if ( canFind("#", fileLine) ) {
-					fileLineSplit_before = fileLine.split("#")[0].split("	");
+					fileLineSplit_before = fileLine.split("#")[0].split(splitDelimiter);
 				} else { 
-					fileLineSplit_before = fileLine.split("	");
+					fileLineSplit_before = fileLine.split(splitDelimiter);
 				}
 				
 				

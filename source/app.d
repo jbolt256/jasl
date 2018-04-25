@@ -50,8 +50,7 @@ void main(string[] args)
 	/* Outputs unformatted, parsed configuration data */
 	} else if ( args[1] == "-config" ) {
 		writeln("CONFIGURATION DATA: \r\n");
-		writeln(Conf.meta);
-		writeln(Conf.settings);
+		writeln(GlobalConfig.settings["useTabs"].tags);
 		
 	/* Builds new config from default */
 	} else if ( args[1] == "-buildconfig" ) {

@@ -99,19 +99,10 @@ class Instructions {
 				Lib.parity(register2);
 			}
 						
-			if ( register1Parity == 0 && register2Parity == 0 ) { r = register1 + register2;  } 
-			if ( register1Parity == 1 && register2Parity == 1 ) { r = -(register1 + register2); }
+			if ( register1Parity == 1 ) { register1 = -register1;  } 
+			if ( register2Parity == 1 ) { register2 = -register2; }
 			
-			/* If the previous two lines fail to change the value of r, then proceed to this switch() case. Otherwise,
-			 * don't do this. 
-			 */
-			if ( r == 1500000 ) { 
-				switch ( register1 > register2 ) {
-					case true: if ( register1Parity == 0 ) { r = register1 - register2; } else { r = -(register1 - register2); }; break;
-					case false: if ( register1Parity == 0 ) { r = -(register2 - register1); } else { r = register2 - register1; }; break;
-					default: throw new JEmException("Adder switch case broken.", JEmInstLine);
-				}
-			}
+			r = register1 + register2;
 						
 			Mem.setVal(0, r); /* Write to register 0 for now */
 			
@@ -122,7 +113,7 @@ class Instructions {
 			text = " register";
 		}
 		
-		lineOut.compilerMsg = format("Adding register %s and%s %s, writing to register 0.", reg1Name, text,reg2Name);
+		lineOut.compilerMsg = format("Adding register %s and%s %s, writing result to register 0.", reg1Name, text,reg2Name);
 		return lineOut;
 	}
 }
