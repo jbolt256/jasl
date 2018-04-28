@@ -1,6 +1,6 @@
 module Compiler.SVG;
 
-import std.stdio, std.string, std.conv, std.format, std.range;
+import std.stdio, std.string, std.conv, std.format, std.range, std.file;
 
 class SVGW {
 	public int line;
@@ -31,8 +31,9 @@ class SVGW {
 				}
 			i++;
 		}
-		
+	
 		std.file.write("program.svg", basicText ~ textOut);
+		basicText = basicText.init;
 	}
 	
 	/** 
