@@ -1,0 +1,1 @@
+Copy "program.svg" to the same directory that the compiled JASL program (jasl.exe).

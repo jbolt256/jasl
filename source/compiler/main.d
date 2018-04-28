@@ -1,17 +1,18 @@
 module Compiler.Main;
 
 import std.string, std.conv, std.stdio, std.algorithm;
-import Compiler.Tools, Compiler.Globals, Compiler.Modifier;
+import Compiler.Tools, Compiler.Globals, Compiler.Modifier, Compiler.SVG;
 
 class CompilerMain {
 
 	private Modifiers M;
+	private SVGW SVG;
 	//private JCMain JC;
 	
 	/** Initialize necessary classes **/
 	this() {
 		M = new Modifiers();
-		//JC = new JCMain();
+		SVG = new SVGW();
 	}
 	
 	/** 
@@ -109,7 +110,8 @@ class CompilerMain {
 				
 				/* Only increment outLineNum if send was a success, also if opcode is <65 and >-1 (i.e 0..64) */
 				if ( OLine_current.opcode > -1 && OLine_current.opcode < 65 ) {
-					OLine_all[outLineNum] = OLine_current;			
+					OLine_current.outLineNum = outLineNum;
+					OLine_all[outLineNum] = OLine_current;	
 					outLineNum++;
 				}
 				
@@ -129,9 +131,11 @@ class CompilerMain {
 		 * moving towards the first. I use an index variable (i) to prevent this. (However, the backwards reading
 		 * would make for a neat feature).
 		 */
-		 
+		SVG.open();		 
 		foreach ( OLine outLine; OLine_all ) {
 			fileLinesOut ~= format("%s|%s|%s", OLine_all[i].opcode, OLine_all[i].databits, OLine_all[i].auxbits);
+			SVG.line = OLine_all[i].outLineNum;
+			SVG.write(OLine_all[i].opcode, OLine_all[i].databits, OLine_all[i].auxbits);
 			
 			if ( outLine.cmdlineMsg != null ) {
 				writefln("%s : %s () ~~ %s", OLine_all[i].inLineNum,  OLine_all[i].modifier, OLine_all[i].cmdlineMsg);
@@ -141,6 +145,8 @@ class CompilerMain {
 			
 			i++;
 		}
+		
+		SVG.close();
 		
 		/* Write data to file and set newline */
 		Compiler.Tools.TFile.toFile(filenameOut, fileLinesOut);
