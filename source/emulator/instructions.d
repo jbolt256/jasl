@@ -109,11 +109,9 @@ class Instructions {
 		} catch ( Exception e ) { throw new JEmException("Error while attempting to add.", JEmInstLine); 
 		} catch ( Error e ) { throw new JEmException("Error while attempting to add.", JEmInstLine); }
 		
-		if ( regFlag == 0 ) {
-			text = " register";
-		}
+		if ( regFlag == 0 ) { text = " register"; }
 		
-		lineOut.compilerMsg = format("Adding register %s and%s %s, writing result to register 0.", reg1Name, text,reg2Name);
+		lineOut.compilerMsg = format("Adding register %s and%s %s, writing result to register 0.", reg1Name, text, reg2Name);
 		return lineOut;
 	}
 }

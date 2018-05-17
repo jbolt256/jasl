@@ -1,6 +1,6 @@
 module Compiler.SVG;
 
-import std.stdio, std.string, std.conv, std.format, std.range, std.file;
+import std.stdio, std.string, std.conv, std.format, std.range, std.file, std.algorithm;
 
 class SVGW {
 	public int line;
@@ -10,8 +10,7 @@ class SVGW {
 	 */
 	public void write(int opcode, int databits, int auxbits) {
 		int i = 0;
-		string textOut = "";
-		string basicText = "";
+		string fileContents, textOut = "", basicText = "";
 		
 		/* Convert the three bit sections to binary numbers formatted to a desired length (6, 20, 6 bits) then merge them to one 32-bit string */
 		string opcodeBin = format!"%06b"(opcode);
@@ -19,21 +18,31 @@ class SVGW {
 		string auxbitsBin = format!"%06b"(auxbits);	
 		string allBits = opcodeBin ~ databitsBin ~ auxbitsBin;
 		
+		fileContents = std.file.read("program.svg"));
 		/* Split by the sharp3 id, then add it again, later on merge with new text */
-		if ( std.file.exists("program.svg") ) {
-			basicText = to!string(std.file.read("program.svg")).split("<g id=\"sharp3\" transform=\"translate(0.5,0.5)\">")[0] ~ "<g id=\"sharp3\" transform=\"translate(0.5,0.5)\">";
+		if ( std.file.exists("program.svg") && fileContents.canFind("<g id=\"sharp3\" transform=\"translate(0.5,0.5)\">", fileContents) ) {
+			basicText = to!string(fileContents.split("<g id=\"sharp3\" transform=\"translate(0.5,0.5)\">")[0] ~ "<g id=\"sharp3\" transform=\"translate(0.5,0.5)\">";
+		} else {
+			writeln("Unable to write to file program.svg. The file either does not already exist, xor is malformed.")
 		}
 		
 		/* Write black boxes wherever zeroes are located in allBits string */
 		foreach ( bit; allBits.stride(1)) { 
 			if ( bit == '0' ) {
-				textOut ~= format("<rect x=\"%s\" y=\"%s\" width=\"14\" height=\"5\" />", 14*i, 5 * this.line);
+				textOut ~= format("<rect x=\"%s\" y=\"%s\" width=\"14\" height=\"5\" />", 14 * i, 5 * this.line);
 				}
 			i++;
 		}
 	
-		std.file.write("program.svg", basicText ~ textOut);
+		try { 
+			std.file.write("program.svg", basicText ~ textOut);
+		} catch ( Exception e ) {
+			writeln("Unable to append to file program.svg");
+		}
+		
+		/* Ensure that large variables are deleted */
 		basicText = basicText.init;
+		fileContents = fileContents.init;
 	}
 	
 	/** 
