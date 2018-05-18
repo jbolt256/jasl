@@ -10,7 +10,7 @@ virtual machine. This theoretical 20-bit computer could be physically constructe
 
 In order to build this program, you will need:
 - A D2 language compiler (preferably DMD: https://dlang.org/download.html#dmd)
-- ~8 MB disk space & ~16MB RAM
+- ~16 MB disk space & ~16MB RAM
 
 If you are using dub with this project, you will also need:
 - dxml package (available on dub: https://code.dlang.org/packages/dxml)

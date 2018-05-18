@@ -134,6 +134,7 @@ class CompilerMain {
 		SVG.open();		 
 		foreach ( OLine outLine; OLine_all ) {
 			fileLinesOut ~= format("%s|%s|%s", OLine_all[i].opcode, OLine_all[i].databits, OLine_all[i].auxbits);
+			
 			SVG.line = OLine_all[i].outLineNum;
 			SVG.write(OLine_all[i].opcode, OLine_all[i].databits, OLine_all[i].auxbits);
 			
@@ -172,7 +173,8 @@ class CompilerMain {
 					case "ERR": toReturn = M.ERR(data); break;
 					case "XYZ": toReturn = M.XYZ(data); break;
 					case "APL": toReturn = M.APL(data); break;
-					case "ADD": toReturn = M.ADD(data); break;
+					case "ADD": toReturn = M.ARITH(data, true); break;
+					case "SUB": toReturn = M.ARITH(data, false); break;
 					default: 
 						throw new JException("Opcode does not exist.", data.inLineNum);
 				}	

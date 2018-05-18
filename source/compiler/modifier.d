@@ -24,7 +24,8 @@ class Modifiers {
 			"ERR": ModAttrib(64, 1, 10),
 			"XYZ": ModAttrib(63, 2, 10),
 			"APL": ModAttrib(62, 2, 3),
-			"ADD": ModAttrib(61, 3, 3)
+			"ADD": ModAttrib(61, 3, 3),
+			"SUB": ModAttrib(60, 3, 3)
 			];
 		}
 		
@@ -75,11 +76,12 @@ class Modifiers {
 		return ret;
 	}
 	
-	/* ADD - adds two integers together.
+	/* ADD - this is a multi modifier that handles addition and subtraction,
+	 * since they are formatted the same way except for the opcode.
 	 * Sample: 		ADD		$4		$1		$3
 	 * Which adds registers 3 and 1 together, then writes to register 3.
 	 */
-	public OLine ADD(ILine data) {
+	public OLine ARITH(ILine data, bool type) {
 		int register2, encodedDatabits, regFlag;
 		
 		if ( data.args[2][0..1] == "$" ) { 
