@@ -1,11 +1,12 @@
 module Compiler.Globals;
 import Main.Configuration;
 
+/** Globals declared here are used by both the compiler and the emulator. **/
 Config GlobalConfig;
 
 const uint JASL_vers= 1000;
 bool JASL_strict	= false;		// not yet a feature
-bool JASL_usingJC	= false;		// the compiler will set this if needed
+bool JASL_usingJC	= false;		// **DEPRECATED** the compiler will set this if needed
 int JEmInstLine		= 0;			// global current emulator line used CAUTIOUSLY for instructions ONLY
 
 /** 

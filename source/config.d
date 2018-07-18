@@ -127,7 +127,7 @@ class Config {
 			std.file.write("./config.xml", sampleConfigData);
 			writeln("New config written to config.xml");
 		} catch ( Exception e ) {
-			writeln("Config write failed. Please do this manually using data from: github.com/jbolt256/jasl/tree/master/meta/config.default.xml");
+			writeln("Config write failed. Please do this manually by copying data from github.com/jbolt256/jasl/tree/master/meta/config.default.xml, then inserting this data into a file in the same directory as jasl.exe. Name this file 'config.xml' without single quotes.");
 		}
 	}
 }

@@ -109,6 +109,7 @@ class Instructions {
 		} catch ( Exception e ) { throw new JEmException("Error while attempting to add.", JEmInstLine); 
 		} catch ( Error e ) { throw new JEmException("Error while attempting to add.", JEmInstLine); }
 		
+		/* Cheap way of adding register to text if needed. */
 		if ( regFlag == 0 ) { text = " register"; }
 		
 		lineOut.compilerMsg = format("Adding register %s and%s %s, writing result to register 0.", reg1Name, text, reg2Name);
